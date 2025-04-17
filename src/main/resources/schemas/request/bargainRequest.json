@@ -1,0 +1,139 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BargainFinderMaxRequestDto",
+  "type": "object",
+  "properties": {
+    "OTA_AirLowFareSearchRQ": {
+      "type": "object",
+      "properties": {
+        "Version": { "type": "string" },
+        "POS": {
+          "type": "object",
+          "properties": {
+            "Source": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "PseudoCityCode": { "type": "string" },
+                  "RequestorID": {
+                    "type": "object",
+                    "properties": {
+                      "Type": { "type": "string" },
+                      "ID": { "type": "string" },
+                      "CompanyName": {
+                        "type": "object",
+                        "properties": {
+                          "Code": { "type": "string" }
+                        },
+                        "required": ["Code"]
+                      }
+                    },
+                    "required": ["Type", "ID", "CompanyName"]
+                  }
+                },
+                "required": ["PseudoCityCode", "RequestorID"]
+              }
+            }
+          },
+          "required": ["Source"]
+        },
+        "OriginDestinationInformation": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "DepartureDateTime": { "type": "string", "format": "date-time" },
+              "OriginLocation": {
+                "type": "object",
+                "properties": {
+                  "LocationCode": { "type": "string" }
+                },
+                "required": ["LocationCode"]
+              },
+              "DestinationLocation": {
+                "type": "object",
+                "properties": {
+                  "LocationCode": { "type": "string" }
+                },
+                "required": ["LocationCode"]
+              }
+            },
+            "required": ["DepartureDateTime", "OriginLocation", "DestinationLocation"]
+          }
+        },
+        "TravelPreferences": {
+          "type": "object",
+          "properties": {
+            "MaxStopsQuantity": { "type": "integer" },
+            "VendorPref": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "Code": { "type": "string" }
+                },
+                "required": ["Code"]
+              }
+            }
+          },
+          "required": ["MaxStopsQuantity", "VendorPref"]
+        },
+        "TravelerInfoSummary": {
+          "type": "object",
+          "properties": {
+            "AirTravelerAvail": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "PassengerTypeQuantity": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "Code": { "type": "string" },
+                        "Quantity": { "type": "integer" }
+                      },
+                      "required": ["Code", "Quantity"]
+                    }
+                  }
+                },
+                "required": ["PassengerTypeQuantity"]
+              }
+            }
+          },
+          "required": ["AirTravelerAvail"]
+        },
+        "TPA_Extensions": {
+          "type": "object",
+          "properties": {
+            "IntelliSellTransaction": {
+              "type": "object",
+              "properties": {
+                "RequestType": {
+                  "type": "object",
+                  "properties": {
+                    "Name": { "type": "string" }
+                  },
+                  "required": ["Name"]
+                }
+              },
+              "required": ["RequestType"]
+            }
+          },
+          "required": ["IntelliSellTransaction"]
+        }
+      },
+      "required": [
+        "Version",
+        "POS",
+        "OriginDestinationInformation",
+        "TravelPreferences",
+        "TravelerInfoSummary",
+        "TPA_Extensions"
+      ]
+    }
+  },
+  "required": ["OTA_AirLowFareSearchRQ"]
+}

@@ -1,0 +1,398 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "groupedItineraryResponse": {
+      "type": "object",
+      "properties": {
+        "version": { "type": "string" },
+        "messages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "severity": { "type": "string" },
+              "type": { "type": "string" },
+              "code": { "type": "string" },
+              "text": { "type": "string" }
+            },
+            "required": ["severity", "type", "code", "text"]
+          }
+        },
+        "statistics": {
+          "type": "object",
+          "properties": {
+            "itineraryCount": { "type": "integer" }
+          },
+          "required": ["itineraryCount"]
+        },
+        "scheduleDescs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "integer" },
+              "frequency": { "type": "string" },
+              "stopCount": { "type": "integer" },
+              "eTicketable": { "type": "boolean" },
+              "totalMilesFlown": { "type": "integer" },
+              "elapsedTime": { "type": "integer" },
+              "departure": {
+                "type": "object",
+                "properties": {
+                  "airport": { "type": "string" },
+                  "city": { "type": "string" },
+                  "country": { "type": "string" },
+                  "time": { "type": "string", "format": "time" }
+                }
+              },
+              "arrival": {
+                "type": "object",
+                "properties": {
+                  "airport": { "type": "string" },
+                  "city": { "type": "string" },
+                  "country": { "type": "string" },
+                  "time": { "type": "string", "format": "time" }
+                }
+              },
+              "carrier": {
+                "type": "object",
+                "properties": {
+                  "marketing": { "type": "string" },
+                  "marketingFlightNumber": { "type": "integer" },
+                  "operating": { "type": "string" },
+                  "operatingFlightNumber": { "type": "integer" },
+                  "equipment": {
+                    "type": "object",
+                    "properties": {
+                      "code": { "type": "string" },
+                      "typeForFirstLeg": { "type": "string" },
+                      "typeForLastLeg": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "taxDescs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "integer" },
+              "code": { "type": "string" },
+              "amount": { "type": "number" },
+              "currency": { "type": "string" },
+              "description": { "type": "string" },
+              "publishedAmount": { "type": "number" },
+              "publishedCurrency": { "type": "string" },
+              "station": { "type": "string" },
+              "country": { "type": "string" }
+            },
+            "required": ["id", "code", "amount", "currency", "description"]
+          }
+        },
+        "taxSummaryDescs": {
+          "type": "array",
+          "items": { "$ref": "#/properties/groupedItineraryResponse/properties/taxDescs/items" }
+        },
+        "obFeeDescs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "integer" },
+              "amount": { "type": "number" },
+              "currency": { "type": "string" }
+            },
+            "required": ["id", "amount", "currency"]
+          }
+        },
+        "fareComponentDescs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "integer" },
+              "governingCarrier": { "type": "string" },
+              "fareAmount": { "type": "number" },
+              "fareCurrency": { "type": "string" },
+              "fareBasisCode": { "type": "string" },
+              "farePassengerType": { "type": "string" },
+              "publishedFareAmount": { "type": "number" },
+              "publishedFareCurrency": { "type": "string" },
+              "directionality": { "type": "string" },
+              "applicablePricingCategories": { "type": "string" },
+              "vendorCode": { "type": "string" },
+              "fareTypeBitmap": { "type": "string" },
+              "fareType": { "type": "string" },
+              "fareTariff": { "type": "string" },
+              "fareRule": { "type": "string" },
+              "cabinCode": { "type": "string" },
+              "segments": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "segment": {
+                      "type": "object",
+                      "properties": {
+                        "stopover": { "type": "boolean" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "validatingCarrierDescs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "integer" },
+              "settlementMethod": { "type": "string" },
+              "newVcxProcess": { "type": "boolean" },
+              "default": {
+                "type": "object",
+                "properties": {
+                  "code": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "baggageAllowanceDescs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "integer" },
+              "pieceCount": { "type": "integer" }
+            }
+          }
+        },
+        "legDescs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "integer" },
+              "elapsedTime": { "type": "integer" },
+              "schedules": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "ref": { "type": "integer" }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "itineraryGroups": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "groupDescription": {
+                "type": "object",
+                "properties": {
+                  "legDescriptions": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "departureDate": { "type": "string", "format": "date" },
+                        "departureLocation": { "type": "string" },
+                        "arrivalLocation": { "type": "string" }
+                      }
+                    }
+                  }
+                }
+              },
+              "itineraries": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "integer" },
+                    "pricingSource": { "type": "string" },
+                    "legs": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "ref": { "type": "integer" }
+                        }
+                      }
+                    },
+                    "pricingInformation": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "pricingSubsource": { "type": "string" },
+                          "offer": {
+                            "type": "object",
+                            "properties": {
+                              "offerId": { "type": "string" },
+                              "timeToLive": { "type": "integer" },
+                              "source": { "type": "string" }
+                            }
+                          },
+                          "fare": {
+                            "type": "object",
+                            "properties": {
+                              "offerItemId": { "type": "string" },
+                              "mandatoryInd": { "type": "boolean" },
+                              "serviceId": { "type": "string" },
+                              "validatingCarrierCode": { "type": "string" },
+                              "vita": { "type": "boolean" },
+                              "eTicketable": { "type": "boolean" },
+                              "lastTicketDate": { "type": "string", "format": "date" },
+                              "lastTicketTime": { "type": "string" },
+                              "governingCarriers": { "type": "string" },
+                              "passengerInfoList": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "passengerInfo": {
+                                      "type": "object",
+                                      "properties": {
+                                        "passengerType": { "type": "string" },
+                                        "passengerNumber": { "type": "integer" },
+                                        "nonRefundable": { "type": "boolean" },
+                                        "fareComponents": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "object",
+                                            "properties": {
+                                              "ref": { "type": "integer" },
+                                              "beginAirport": { "type": "string" },
+                                              "endAirport": { "type": "string" },
+                                              "segments": {
+                                                "type": "array",
+                                                "items": {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "segment": {
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "bookingCode": { "type": "string" },
+                                                        "cabinCode": { "type": "string" },
+                                                        "mealCode": { "type": "string" },
+                                                        "seatsAvailable": { "type": "integer" },
+                                                        "availabilityBreak": { "type": "boolean" }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "taxes": {
+                                          "type": "array",
+                                          "items": { "type": "object", "properties": { "ref": { "type": "integer" } } }
+                                        },
+                                        "taxSummaries": {
+                                          "type": "array",
+                                          "items": { "type": "object", "properties": { "ref": { "type": "integer" } } }
+                                        },
+                                        "obFees": {
+                                          "type": "array",
+                                          "items": { "type": "object", "properties": { "ref": { "type": "integer" } } }
+                                        },
+                                        "currencyConversion": {
+                                          "type": "object",
+                                          "properties": {
+                                            "from": { "type": "string" },
+                                            "to": { "type": "string" },
+                                            "exchangeRateUsed": { "type": "number" }
+                                          }
+                                        },
+                                        "passengerTotalFare": {
+                                          "type": "object",
+                                          "properties": {
+                                            "totalFare": { "type": "number" },
+                                            "totalTaxAmount": { "type": "number" },
+                                            "currency": { "type": "string" },
+                                            "baseFareAmount": { "type": "number" },
+                                            "baseFareCurrency": { "type": "string" },
+                                            "equivalentAmount": { "type": "number" },
+                                            "equivalentCurrency": { "type": "string" },
+                                            "constructionAmount": { "type": "number" },
+                                            "constructionCurrency": { "type": "string" },
+                                            "exchangeRateOne": { "type": "number" }
+                                          }
+                                        },
+                                        "baggageInformation": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "object",
+                                            "properties": {
+                                              "provisionType": { "type": "string" },
+                                              "airlineCode": { "type": "string" },
+                                              "segments": {
+                                                "type": "array",
+                                                "items": { "type": "object", "properties": { "id": { "type": "integer" } } }
+                                              },
+                                              "allowance": {
+                                                "type": "object",
+                                                "properties": {
+                                                  "ref": { "type": "integer" }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "totalFare": {
+                                "type": "object",
+                                "properties": {
+                                  "totalPrice": { "type": "number" },
+                                  "totalTaxAmount": { "type": "number" },
+                                  "currency": { "type": "string" },
+                                  "baseFareAmount": { "type": "number" },
+                                  "baseFareCurrency": { "type": "string" },
+                                  "constructionAmount": { "type": "number" },
+                                  "constructionCurrency": { "type": "string" },
+                                  "equivalentAmount": { "type": "number" },
+                                  "equivalentCurrency": { "type": "string" }
+                                }
+                              },
+                              "validatingCarriers": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "ref": { "type": "integer" }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "required": ["version", "messages", "statistics", "scheduleDescs"]
+    }
+  },
+  "required": ["groupedItineraryResponse"]
+}
